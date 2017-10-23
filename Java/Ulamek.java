@@ -37,8 +37,9 @@ public class Ulamek
 
     // operacje
     void skracaj() {
-        a /= nwd(a, b);
-        b /= nwd(a, b);
+        int x = nwd(a, b);
+        a /= x;
+        b /= x;
     }
     void mnoz(Ulamek u){
         a *= u.a;
@@ -51,15 +52,13 @@ public class Ulamek
         skracaj();
     }
     void dodaj(Ulamek u){
-	int x = a;        
-	a = a*u.b+b*u.a;
-        b = x*b;
+        a = a*u.b+b*u.a;
+        b = u.b*b;
         skracaj();
     }
     void odejmij(Ulamek u){
-	int x = a;
         a = a*u.b-b*u.a;
-        b = x*b;
+        b = u.b*b;
         skracaj();
     }
 
