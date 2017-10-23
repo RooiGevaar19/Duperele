@@ -51,28 +51,30 @@ public class Ulamek
         skracaj();
     }
     void dodaj(Ulamek u){
-        a = a*u.b+b*u.a;
-        b = a*b;
+	int x = a;        
+	a = a*u.b+b*u.a;
+        b = x*b;
         skracaj();
     }
     void odejmij(Ulamek u){
+	int x = a;
         a = a*u.b-b*u.a;
-        b = a*b;
+        b = x*b;
         skracaj();
     }
 
     // reprezentacje
     @Override
-    String toString() {
-        return ""+a+"/"+b+"";
+    public String toString() {
+        return ""+this.a+"/"+this.b+"";
     }
-    float toFloat() {
+    public float toFloat() {
         return ((float)(a))/((float)(b));
     }
-    double toDouble() {
+    public double toDouble() {
         return ((double)(a))/((double)(b));
     }
-    int toInt() {
+    public int toInt() {
         return a/b;
     }
 }
