@@ -44,7 +44,7 @@ begin
   if_success := False;
   for att := 1 to MaxAttempts do
   begin
-    if (insertPIN() = 2137) then
+    if (insertPIN() = correctPin) then
     begin
       event_onCorrectPIN();
       if_success := True;
