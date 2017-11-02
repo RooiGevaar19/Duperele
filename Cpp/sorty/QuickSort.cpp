@@ -90,7 +90,7 @@ int main()
 
     int data[n]; fill_random(data, n); // dla przykladowych danych zakomentowac
 
-    printf("Algorithm   | SHIFTING SORT\n");
+    printf("Algorithm   | QUICK SORT (Partitioning LR)\n");
     printf("Author      | RooiGevaar19\n");
 	printf("Table       |  \t");
 	for (int i = 0; i < n; i++) printf("%7i\t", data[i]);
