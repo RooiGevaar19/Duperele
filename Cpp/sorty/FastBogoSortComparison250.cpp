@@ -4,7 +4,7 @@
 #include <ctime>
 #include <cmath>
 
-long long step = 0;
+unsigned long long step = 0;
 int count_test = 250;
 
 class Timer

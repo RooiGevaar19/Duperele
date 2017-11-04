@@ -4,7 +4,6 @@
 #include <ctime>
 #include <cmath>
 
-int step = 0;
 int count_test = 15;
 
 class Timer
@@ -81,7 +80,7 @@ int main()
         fill_random(data, j);
         Timer t;
 	    t.reset();
-	    long long step = BogoSort(data, j);
+	    unsigned long long step = BogoSort(data, j);
 	    double td = t.elapsed();
         setlocale(LC_ALL,"");
         if (fmod(td,60.0) < 10.0) printf("%12i| %02.0f:%02.0f:0%02.9f |%'25llu\n", j, floor(td/3600.0), floor(fmod(td,3600.0)/60.0), fmod(td,60.0), step);
