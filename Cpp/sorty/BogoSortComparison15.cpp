@@ -84,8 +84,8 @@ int main()
 	    long long step = BogoSort(data, j);
 	    double td = t.elapsed();
         setlocale(LC_ALL,"");
-        if (fmod(td,60.0) < 10.0) printf("%12i| %02.0f:%02.0f:0%02.9f |%'25Li\n", j, floor(td/3600.0), floor(fmod(td,3600.0)/60.0), fmod(td,60.0), step);
-        else printf("%12i| %02.0f:%02.0f:%02.9f |%'25Li\n", j, floor(td/3600.0), floor(fmod(td,3600.0)/60.0), fmod(td,60.0), step);
+        if (fmod(td,60.0) < 10.0) printf("%12i| %02.0f:%02.0f:0%02.9f |%'25lli\n", j, floor(td/3600.0), floor(fmod(td,3600.0)/60.0), fmod(td,60.0), step);
+        else printf("%12i| %02.0f:%02.0f:%02.9f |%'25lli\n", j, floor(td/3600.0), floor(fmod(td,3600.0)/60.0), fmod(td,60.0), step);
     }
 	return 0;
 }
