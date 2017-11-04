@@ -30,6 +30,8 @@ public class Ulamek
 
     // pomoce
     private int nwd(int a, int b) {
+        a = abs(a);
+        b = abs(b);
         if (a == b) return a;
         else if (a > b) return nwd(a-b, b);
         else return nwd(a, b-a);
