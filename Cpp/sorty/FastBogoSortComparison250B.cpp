@@ -99,7 +99,7 @@ int main()
 	    FastBogoSort(data, 0, j);
 	    double td = t.elapsed();
         setlocale(LC_ALL,"");
-        printf("%i\t%2.9lf\t%lli\n", j, td, step);
+        printf("%i\t%2.9lf\t%llu\n", j, td, step);
     }
 	return 0;
 }
