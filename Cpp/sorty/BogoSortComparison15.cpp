@@ -43,9 +43,9 @@ static void Shuffle(int* data, int count)
 	}
 }
 
-static long long BogoSort(int* data, int count)
+static unsigned long long BogoSort(int* data, int count)
 {
-    step = 0;
+    unsigned long long step = 0;
     while (!IsSorted(data, count))
 	{
 		Shuffle(data, count);
