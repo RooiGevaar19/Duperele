@@ -10,8 +10,48 @@ public class MyMatrix<T extends Number>
         this.row = x;
         this.col = y;
     }
+    //-------------------------
+    public interface MatmaDlaUlomow<A extends Number> {
+        public A add(A a, A b);
+        public A sub(A a, A b);
+        public A mul(A a, A b);
+    }
 
+    public class DoubleMaths implements MatmaDlaUlomow<double> {
+        public double add(double a, double b) {
+            return a+b;
+        }
+        public double sub(double a, double b) {
+            return a-b;
+        }
+        public double mul(double a, double b) {
+            return a*b;
+        }
+    }
 
+    public class TMaths implements MatmaDlaUlomow<T> {
+        public T add(T a, T b) {
+            return a+b;
+        }
+        public T sub(T a, T b) {
+            return a-b;
+        }
+        public T mul(T a, T b) {
+            return a*b;
+        }
+    }
+
+//    public class GenericClass<? extends Number>{
+//    public Integer add(? x, ? y){
+//        if(x instance of Integer && y instance of Integer){
+//            //Do your math with Integer class methods help
+//            //Return here
+//        }
+//        return (Interger)null;
+//    }
+//}
+
+    //-------------------------
     public T getAt(int x, int y) {
         return data[x][y];
     }
@@ -45,7 +85,7 @@ public class MyMatrix<T extends Number>
         if ((getColCount() == B.getColCount())&&(getRowCount() == B.getRowCount())) {
             for (int j = 0; j < getColCount(); j++) {
                 for (int i = 0; i < getRowCount(); i++) {
-                    s.setAt(i, j, (this.getAt(i,j) + B.getAt(i, j)));
+                    s.setAt(i, j, MatmaDlaUlomow.add(this.getAt(i,j), B.getAt(i, j)));
                 }
             }
         } else {

@@ -22,11 +22,12 @@ template<typename typek> class MyMatrix
         }
         ~MyMatrix() {
             //delete data;
+            cout << "destructing" << endl;
             for(int i = 0; i < col; i++) {
                 delete [] data[i];
             }
             delete [] data;
-            cout << "gowno" << endl;
+            cout << "destruction" << endl;
         }
 
         typek getAt(int x, int y) {
@@ -59,7 +60,7 @@ template<typename typek> class MyMatrix
             if ((getColCount() == B.getColCount())&&(getRowCount() == B.getRowCount())) {
                 for (int j = 0; j < getColCount(); j++) {
                     for (int i = 0; i < getRowCount(); i++) {
-                        setAt(i, j, (getAt(i,j) + B.getAt(i, j)));
+                        this->setAt(i, j, (this->getAt(i,j) + B.getAt(i, j)));
                     }
                 }
             }
@@ -86,13 +87,13 @@ int main()
     a.setAt(0, 0, 3);
     a.setAt(1, 0, 2.5);
     a.setAt(0, 1, -1);
-    a.setAt(1, 1, (a.getAt(1,0) - a.getAt(0,1)));
+    a.setAt(1, 1, (a.getAt(1,0) + a.getAt(0,1)));
 
     MyMatrix<double> b(2,2);
     b.setAt(0, 0, 3);
     b.setAt(1, 0, 2.5);
     b.setAt(0, 1, -1);
-    b.setAt(1, 1, (b.getAt(1,0) - b.getAt(0,1)));
+    b.setAt(1, 1, (b.getAt(1,0) + b.getAt(0,1)));
 
     getchar();
     cout << "A:" << endl;
@@ -105,4 +106,6 @@ int main()
     a.addMatrix(b);
     a.display();
 
+    getchar();
+    return 0;
 }
