@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
+#include <cstdio>
 
 using namespace std;
 
@@ -10,7 +11,7 @@ private:
     unsigned rows;
     unsigned cols;
 
-    T& abs(const T& x) {
+    T abs(T x) {
         return (x >= 0) ? x : -x;
     }
 
@@ -216,11 +217,11 @@ private:
         }
 
         // metoda Gauss-Jordan połowicznego wyboru (tylko wiersze)
-        vector<T&> solveGauss() {
+        vector<T> solveGauss() {
             int n = getRowCount();
             for (int i = 0; i < n; i++) {
                 // znajdź wiersz z maksymalnym elementem
-                T& maxEl = abs(matrix[i][i]);
+                T maxEl = abs(matrix[i][i]);
                 int maxRow = i;
                 for (int k = i+1; k < n; k++) {
                     if (abs(matrix[k][i]) > maxEl) {
@@ -230,13 +231,13 @@ private:
                 }
                 // zamień maksymalny wiersz z obecnym
                 for (int k = i; k < n+1; k++) {
-                    T& pom = matrix[maxRow][k];
+                    T pom = matrix[maxRow][k];
                     matrix[maxRow][k] = matrix[i][k];
                     matrix[i][k] = pom;
                 }
                 // wyprowadź zera przed obecnym wierszem
                 for (int k = i+1; k < n; k++) {
-                    T& c = -matrix[k][i] / matrix[i][i];
+                    T c = -matrix[k][i] / matrix[i][i];
                     for (int j = i; j < n+1; j++) {
                         if (i == j) {
                             matrix[k][j] = 0;
@@ -247,7 +248,7 @@ private:
                 }
             }
             // rozwiąż Ax = B za pomocą powstałej macierzy trójkątnej
-            vector<T&> x(n);
+            vector<T> x(n);
             for (int i=n-1; i>=0; i--) {
                 x[i] = matrix[i][n] / matrix[i][i];
                 for (int k=i-1;k>=0; k--) {
@@ -274,5 +275,27 @@ int main() {
     mat3(2, 1) = 3.7;
     mat3.display();
     cout << endl;
+    getchar();
+
+//    { 2x + 5y = -4
+//    {  x - 4y = 11
+//
+//    x = 3
+//    y = -2
+
+    MyMatrix<double> A(2, 3, 0.0);
+    A(0, 0)= 2;
+    A(0, 1)= 5;
+    A(1, 0)= 1;
+    A(1, 1)= -4;
+    A(0, 2) = -4;
+    A(1, 2) = 11;
+    A.display();
+    vector<double> x(2);
+    x = A.solveGauss();
+    A.display();
+    cout << "[ ";
+    for (int i = 0; i < 2; i++) cout << x[i] << " ";
+    cout << "]";
     return 0;
 }
