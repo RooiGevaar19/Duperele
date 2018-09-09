@@ -1,2 +1,5 @@
 # Duperele
-pare mniej lub bardziej kretyńskich przykładów kodu
+śmietnik, wysypisko i wgl  
+pare mniej lub bardziej kretyńskich przykładów kodu  
+róbta co chceta  
+XD  
