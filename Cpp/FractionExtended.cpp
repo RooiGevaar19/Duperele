@@ -70,16 +70,41 @@ class Fraction
 
         // gettery i settery
 
-        long long int getNumerator(){
+        int getNumerator() {
             return a;
         }
-        long long int getDenominator(){
+        int getDenominator() {
             return b;
         }
-        void setNumerator(int x){
+        long int getNumerator() {
+            return a;
+        }
+        long int getDenominator() {
+            return b;
+        }
+        long long int getNumerator() {
+            return a;
+        }
+        long long int getDenominator() {
+            return b;
+        }
+
+        void setNumerator(int x) {
             a = x;
         }
-        void setDenominator(int x){
+        void setDenominator(int x) {
+            b = x;
+        }
+        void setNumerator(long int x) {
+            a = x;
+        }
+        void setDenominator(long int x) {
+            b = x;
+        }
+        void setNumerator(long long int x) {
+            a = x;
+        }
+        void setDenominator(long long int x) {
             b = x;
         }
 

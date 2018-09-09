@@ -1,3 +1,4 @@
-.class
-.exec
-.csv
+*.class
+*.exec
+*.csv
+*.out
