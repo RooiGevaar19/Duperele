@@ -138,18 +138,40 @@ class Collection {
             random_shuffle(a.begin(), a.end());
             
         }
-        Card getAt(int index) {
-            return a[index];
-        }
         int getSize() {
             return size;
+        }
+        Card get() {
+            return a[size-1];
+        }
+        Card getAt(int index) {
+            return a[index];
         }
         void push(Card x) {
             this->size++;
             this->a.resize(size);
             this->a[size-1] = x;
         }
+        Card pop() {
+            Card ret = this->a[size-1];
+            this->a.resize(--size);
+            return ret;
+        }
+        bool isEmpty() {
+            if (this->a.size() == 0 && this->size == 0) return true;
+            return false;
+        }
+        //Card popAt(int index) {
+        //    size--;
+        //    return this->a.erase(index);
+        //}
 };
+
+void displayCollection(Collection x) {
+    for (int i = 0; i < x.getSize(); i++) {
+        cout << x.getAt(i).toString() << "\t";
+    }
+}
 
 int main() {
     Collection x = Collection();
@@ -157,11 +179,24 @@ int main() {
     srand(time(NULL));
     x.generatePan();
     x.shuffle();
-    x.push(Card(0));
-    
-    for (int i = 0; i < x.getSize(); i++) {
-        cout << x.getAt(i).toString() << "\t";
+    displayCollection(x);
+    //x.popAt(x.getSize()-1);
+
+
+    Collection player[4];
+    int who = 0;
+    while (!x.isEmpty()) {
+        player[who].push(x.pop());
+        who = (who+1)%4;
     }
+
     cout << "\n";
+    cout << "PLAYERS:\n";
+    for (int i = 0; i < 4; i++) {
+        displayCollection(player[i]);
+        cout << "\n";
+    }    
+
+    cout << "\n" << x.getSize() << "\n";
     return 0;
 }
