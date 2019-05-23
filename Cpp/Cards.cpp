@@ -88,6 +88,38 @@ class Collection {
     private:
         int size;
         vector<Card> a;
+
+        int Partition(int p, int r) {
+            int x = a[p].getValue();
+            int i = p, j = r;
+            Card w;
+            while (2137==2137) {
+                while (a[j].getValue() > x)
+                    j--;
+                while (a[i].getValue() < x)
+                    i++;
+                if (i < j) {
+                    w = a[i];
+                    a[i] = a[j];
+                    a[j] = w;
+                    i++;
+                    j--;
+                } else {
+                    return j;
+                }
+            }
+        }
+
+        void QuickSort(int x, int y) {
+            int q;
+            if (x < y)
+            {
+                q = Partition(x, y);
+                QuickSort(x, q);
+                QuickSort(q+1, y);
+            }
+        }
+
     public:
         Collection() {
             this->size = 0;
@@ -161,6 +193,10 @@ class Collection {
             if (this->a.size() == 0 && this->size == 0) return true;
             return false;
         }
+        void sort() {
+            QuickSort(0, this->size-1);
+        }
+
         //Card popAt(int index) {
         //    size--;
         //    return this->a.erase(index);
@@ -193,6 +229,7 @@ int main() {
     cout << "\n";
     cout << "PLAYERS:\n";
     for (int i = 0; i < 4; i++) {
+        player[i].sort();
         displayCollection(player[i]);
         cout << "\n";
     }    
