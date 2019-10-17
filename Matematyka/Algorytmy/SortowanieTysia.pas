@@ -20,6 +20,7 @@ begin
     for i := 1 to n-1 do
         for j := i+1 to n do 
             if (A[j] < A[i]) then begin
+                // zamieniamy wartości A[i] i A[j] miejscami
                 pom := A[i];
                 A[i] := A[j];
                 A[j] := pom;
