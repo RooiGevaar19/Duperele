@@ -12,6 +12,7 @@ var
     i      : Integer;
     result : Integer;
 
+// metoda bąbelkowa
 procedure sort(var tab : array of Integer);
 var
   i, j : Longint;
@@ -26,6 +27,8 @@ begin
             end;
 end;
 
+
+// metoda Tysi
 procedure sort2(var tab : array of Integer);
 var
   i, j : Longint;
