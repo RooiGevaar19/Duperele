@@ -2,3 +2,4 @@
 *.exec
 *.csv
 *.out
+*.o
