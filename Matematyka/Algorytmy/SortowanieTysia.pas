@@ -5,7 +5,7 @@ const
 
 var
     A    : Array[1..n] of Integer;
-    i, j : Longint;
+    i, j : LongInt;
     pom  : Integer;
 
 begin
