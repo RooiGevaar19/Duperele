@@ -3,7 +3,7 @@ program HeapSort;
 uses sysutils;
 
 const
-    MAX = 20;
+    MAX = 40;
     RNG = 200;
 
 var
@@ -11,11 +11,18 @@ var
 
 // ========== zapełnianie i wypisywanie tablicy
 
-procedure fillRandom(var T : Array of Integer; range : Integer);
+procedure fillRandomNaturals(var T : Array of Integer; range : Integer);
 var
     i : Integer;
 begin
     for i := Low(T) to High(T) do table[i] := random(RNG);
+end;
+
+procedure fillRandomIntegers(var T : Array of Integer; range : Integer);
+var
+    i : Integer;
+begin
+    for i := Low(T) to High(T) do table[i] := random(2*RNG)-RNG;
 end;
 
 function tableToString(T : Array of Integer) : String;
@@ -84,15 +91,15 @@ begin
     buildHeap(T);
     for i := High(T) downto Low(T)+1 do
     begin
-        swap(T[0], T[i]);
-        heapify(T, i, 0);
+        swap(T[Low(T)], T[i]);
+        heapify(T, i, Low(T));
     end;
 end;
 
 begin
     randomize;
     SetLength(table, MAX);
-    fillRandom(table, RNG);
+    fillRandomIntegers(table, RNG);
     writeln(tableToString(table));
     HeapSort(table);
     writeln(tableToString(table));
