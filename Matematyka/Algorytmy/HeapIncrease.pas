@@ -3,11 +3,13 @@ program HeapSort;
 uses sysutils;
 
 const
-    MAX = 40;
-    RNG = 200;
+    MAX = 10;
+    RNG = 20;
+
+type Heap = Array of Integer;
 
 var
-    table : Array of Integer;
+    table : Heap;
 
 // ========== zapełnianie i wypisywanie tablicy
 
@@ -53,6 +55,11 @@ begin
     right := x * 2 + 2;
 end;
 
+function parent(x : Integer) : Integer;
+begin
+    parent := x div 2;
+end;
+
 procedure swap(var x, y : Integer);
 begin
     x := x + y;
@@ -89,21 +96,56 @@ procedure HeapSort(var T : Array of Integer);
 var i : Integer;
 begin
     buildHeap(T);
-    writeln('Heap  : ', tableToString(table));
     for i := High(T) downto Low(T)+1 do
     begin
         swap(T[Low(T)], T[i]);
         heapify(T, i, Low(T));
-        writeln('Step  : ', tableToString(table));
     end;
+end;
+
+procedure HeapIncreaseKey(var T : Array of Integer; i : Integer; K : Integer);
+begin
+    if (k < T[i]) then Exit;
+    T[i] := k;
+    while (i >= 1) and (T[parent(i)] < T[i]) do
+    begin
+        swap(T[i], T[parent(i)]);
+        i := parent(i);
+    end;
+end;
+
+function HeapExtractMax(var T : Heap) : Integer;
+var 
+    i, val : Integer;
+begin
+    if (Length(T) = 0) then Exit;
+    val := T[Low(T)];
+    for i := Low(T)+1 to High(T) do T[i-1] := T[i];
+    SetLength(T, Length(T)-1);
+    buildHeap(T);
+    HeapExtractMax := val;
+end;
+
+procedure HeapInsert(var T : Heap; key : Integer);
+begin
+    SetLength(T, Length(T)+1);
+    T[High(T)] := key-1;
+    HeapIncreaseKey(T, High(T), key);
 end;
 
 begin
     randomize;
     SetLength(table, MAX);
     fillRandomIntegers(table, RNG);
-    writeln('HEAPSORT!!!');
-    writeln('Before: ', tableToString(table));
-    HeapSort(table);
-    writeln('After : ', tableToString(table));
+    writeln('HEAPINCREASEKEY!!!');
+    writeln('Before           : ', tableToString(table));
+    buildHeap(table);
+    writeln('Heap             : ', tableToString(table));
+    HeapIncreaseKey(table, High(table) div 2, 0);
+    writeln('After increase   : ', tableToString(table));
+    writeln('Extracted        : ', HeapExtractMax(table));
+    writeln('After extraction : ', tableToString(table));
+    HeapInsert(table, 2137);
+    HeapInsert(table, 1488);
+    writeln('After insertion  : ', tableToString(table));
 end.

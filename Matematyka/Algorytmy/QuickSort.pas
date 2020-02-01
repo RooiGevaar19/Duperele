@@ -1,4 +1,4 @@
-program HeapSort;
+program CountingSort;
 
 uses sysutils;
 
@@ -41,17 +41,7 @@ begin
     end;
 end;
 
-// ========== funkcje do kopców
-
-function left(x : Integer) : Integer;
-begin
-    left := x * 2 + 1;
-end;
-
-function right(x : Integer) : Integer;
-begin
-    right := x * 2 + 2;
-end;
+// ========== quicksort
 
 procedure swap(var x, y : Integer);
 begin
@@ -60,50 +50,49 @@ begin
     x := x - y;
 end;
 
-procedure heapify(var T : Array of Integer; n : Integer; i : Integer);
-var
-    l, r    : Integer;
-    largest : Integer;
+function Partition(var arr : Array of Integer; low : Integer; high : Integer) : Integer
 begin
-    largest := i;
-    l := left(i);
-    r := right(i);
-    if (l < n) and (T[l] > T[largest]) then largest := l;
-    if (r < n) and (T[r] > T[largest]) then largest := r;
-
-    if largest <> i then
-    begin
-        swap(T[i], T[largest]);
-        heapify(T, n, largest);
-    end;
+    int pivot = arr[high];    // pivot 
+    int i = (low - 1);  // Index of smaller element 
+  
+    for (int j = low; j <= high- 1; j++) 
+    { 
+        // If current element is smaller than or 
+        // equal to pivot 
+        if (arr[j] <= pivot) 
+        { 
+            i++;    // increment index of smaller element 
+            swap(&arr[i], &arr[j]); 
+        } 
+    } 
+    swap(&arr[i + 1], &arr[high]); 
+    return (i + 1); 
 end;
 
-procedure buildHeap(var T : Array of Integer);
-var i : Integer;
+procedure QuickSortEngine(var A : Array of Integer; p : Integer; r : Integer);		// klasyczny QuickSort
+var q : Integer;
 begin
-    for i := High(T) div 2 downto Low(T) do
-        heapify(T, Length(T), i); 
+	if (p < r) then
+	begin
+		q := Partition(A,p,r);
+		QuickSortEngine(A,p,q);
+		QuickSortEngine(A,q+1,r);
+	end;
 end;
 
-procedure HeapSort(var T : Array of Integer);
-var i : Integer;
+procedure QuickSort(var T : Array of Integer);
 begin
-    buildHeap(T);
-    writeln('Heap  : ', tableToString(table));
-    for i := High(T) downto Low(T)+1 do
-    begin
-        swap(T[Low(T)], T[i]);
-        heapify(T, i, Low(T));
-        writeln('Step  : ', tableToString(table));
-    end;
+    QuickSortEngine(T, Low(T), High(T));
 end;
+
+// ========== main
 
 begin
     randomize;
     SetLength(table, MAX);
     fillRandomIntegers(table, RNG);
-    writeln('HEAPSORT!!!');
+    writeln('QUICK SORT!!!');
     writeln('Before: ', tableToString(table));
-    HeapSort(table);
+    QuickSort(table);
     writeln('After : ', tableToString(table));
 end.
