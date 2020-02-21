@@ -11,7 +11,6 @@ int potega(int n) {
             case 2 : return 4;
             case 3 : return 8;
         }
-        if (n % 4 == 0) return 6;
     }
 }
 
