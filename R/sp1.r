@@ -209,12 +209,12 @@ degrees
 degs <- degrees
 
 # 2a
-degrees.length <- length(degrees)
-degrees.avg <- sum(degrees) / length(degrees)
-degrees.variance <- sum((degrees - degrees.avg)^2) / (degrees.length-1)
-degrees.stddev <- sqrt(degrees.variance)
-degrees.asym <- sum((degrees-degrees.avg)^3) / (sum((degrees-degrees.avg)^2))^1.5
-degrees.kurt <- (1/n*sum((degrees-degrees.avg)^4))/(degrees.stddev^4)-3
+#degrees.length <- length(degrees)
+#degrees.avg <- sum(degrees) / length(degrees)
+#degrees.variance <- sum((degrees - degrees.avg)^2) / (degrees.length-1)
+#degrees.stddev <- sqrt(degrees.variance)
+#degrees.asym <- sum((degrees-degrees.avg)^3) / (sum((degrees-degrees.avg)^2))^1.5
+#degrees.kurt <- (1/n*sum((degrees-degrees.avg)^4))/(degrees.stddev^4)-3
 degrees.median    <- kwantyl(degrees, 1/2)
 degrees.quantiles <- kwantyl(degrees, c(1/4, 1/2, 3/4))
 
@@ -225,19 +225,54 @@ degrees.asymPos <- (degrees.Q1 + degrees.Q3 - 2*degrees.median)/(degrees.Q3-degr
 degrees.range <- (max(degrees) - min(degrees)) / floor(sqrt(length(degrees)))
 degrees.mode <- getmode(degrees)
 
+# 2e
+
+degrees.proc <- table(data1$Degrees)/n * 100
+
+# 2f
+
+zadanie2f <- function(x) {
+    p <- length(data1$Degrees[data1$Degrees == "W"])/65
+    y <- sum(dbinom(0:x,30,p))
+}
+
+zadanie2g <- function(x) {
+    p <- length(data1$Degrees[data1$Degrees == "W"])/65
+    mu <- 30*p
+    si <- sqrt(30*p*(1-p))
+    print(mu)
+    print(si)
+    y <- pnorm(x, mean=mu, sd=si)# - pnorm(0, mean=mu, sd=si)
+}
+
 # robota
 
 writeln("Zadanie 2");
-writeln("a) Miary klasyczne");
-writeln(c("   - Średnia:                  " , degrees.avg))
-writeln(c("   - Odchylenie standardowe:   " , degrees.stddev))
-writeln(c("   - Asymetria:                " , degrees.asym))
-writeln(c("   - Kurtoza:                  " , degrees.kurt))
 writeln(c("b) Mediana:                    " , IntToStr(degrees.median)))
 writeln(c("   Kwartyle:                   [", toString(degrees.quantiles), "]"), " ")
-writeln("c) Miary pozycyjne");
-writeln(c("   - Asymetria:                " , degrees.asymPos),sep="")
-writeln(c("   - Modalna:                  " , degrees.mode),sep="")
-writeln(c("   - Odchylenie ćwiartkowe:    " , (degrees.Q3-degrees.Q1)/2))
+writeln("d) Wykres kolumnowy liczebności");
+saveToPNG(
+    "Wykres_2D",
+    barplot(table(data1$Degrees)[c(1,4,2,3)], 
+        ylim=c(0,20), 
+        names.arg=c("Podstawowe","Zawodowe","Średnie","Wyższe"),
+        main="Wykres kolumnowy liczebności", 
+        xlab="Wykształcenie", 
+        ylab="Liczebność", 
+        col="forestgreen"))
+writeln("e) Wykres kolumnowy procentowy");
+saveToPNG(
+    "Wykres_2E",
+    barplot(degrees.proc[c(1,4,2,3)], 
+        ylim=c(0,30), 
+        main="Wykres kolumnowy procentowy",
+        names.arg=c("Podstawowe","Zawodowe","Średnie","Wyższe"), 
+        xlab="Wykształcenie", 
+        ylab="Udział procentowy w %", 
+        col="forestgreen"))
+writeln(c("f) P(X < 8) = ", zadanie2f(7)));
+writeln(c("g) P(X < 8) = ", zadanie2g(7)));
+
+# , freq = T, breaks = rangeTable, xlim=c(floor(rangeLeft), ceiling(rangeRight)), col="forestgreen", xlab="Wartości", ylab="Liczebność", main="Histogram liczebności")
 
 
