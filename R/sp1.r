@@ -186,26 +186,58 @@ writeln("");
 # Zadanie 2
 
 
-degrees <- lapply(data1$Degrees, function(x) {
-         if (x == "P") 0
-    else if (x == "Z") 1
-    else if (x == "Sr") 2
-    else if (x == "W") 3
+StrToInt <- function(x) {
+         if (x == "P")  1
+    else if (x == "Z")  2
+    else if (x == "Sr") 3
+    else if (x == "W")  4
     else -1
-})
+}
+
+IntToStr <- function(x) {
+         if (x == 1) "P"
+    else if (x == 2) "Z"
+    else if (x == 3) "Sr"
+    else if (x == 4) "W"
+    else "idk"
+}
+
+degrees <- lapply(data1$Degrees, StrToInt)
 degrees <- unlist(degrees)
 degrees
 
-# a
+degs <- degrees
+
+# 2a
+degrees.length <- length(degrees)
+degrees.avg <- sum(degrees) / length(degrees)
+degrees.variance <- sum((degrees - degrees.avg)^2) / (degrees.length-1)
+degrees.stddev <- sqrt(degrees.variance)
+degrees.asym <- sum((degrees-degrees.avg)^3) / (sum((degrees-degrees.avg)^2))^1.5
+degrees.kurt <- (1/n*sum((degrees-degrees.avg)^4))/(degrees.stddev^4)-3
+degrees.median    <- kwantyl(degrees, 1/2)
+degrees.quantiles <- kwantyl(degrees, c(1/4, 1/2, 3/4))
+
+# 2b
+degrees.Q3 <- kwantyl(degrees, 3/4)
+degrees.Q1 <- kwantyl(degrees, 1/4)
+degrees.asymPos <- (degrees.Q1 + degrees.Q3 - 2*degrees.median)/(degrees.Q3-degrees.Q1)
+degrees.range <- (max(degrees) - min(degrees)) / floor(sqrt(length(degrees)))
+degrees.mode <- getmode(degrees)
 
 # robota
 
 writeln("Zadanie 2");
 writeln("a) Miary klasyczne");
-writeln(c("   - Średnia:                  " , salary.avg))
-writeln(c("   - Odchylenie standardowe:   " , salary.stddev))
-writeln(c("   - Asymetria:                " , salary.asym))
-writeln(c("   - Kurtoza:                  " , salary.kurt))
-
+writeln(c("   - Średnia:                  " , degrees.avg))
+writeln(c("   - Odchylenie standardowe:   " , degrees.stddev))
+writeln(c("   - Asymetria:                " , degrees.asym))
+writeln(c("   - Kurtoza:                  " , degrees.kurt))
+writeln(c("b) Mediana:                    " , IntToStr(degrees.median)))
+writeln(c("   Kwartyle:                   [", toString(degrees.quantiles), "]"), " ")
+writeln("c) Miary pozycyjne");
+writeln(c("   - Asymetria:                " , degrees.asymPos),sep="")
+writeln(c("   - Modalna:                  " , degrees.mode),sep="")
+writeln(c("   - Odchylenie ćwiartkowe:    " , (degrees.Q3-degrees.Q1)/2))
 
 
