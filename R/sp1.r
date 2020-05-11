@@ -242,6 +242,19 @@ zadanie2g <- function(x) {
     y <- pnorm(x+0.5, mean=mu, sd=si) - pnorm(0-0.5, mean=mu, sd=si)
 }
 
+
+
+zadanie2h <- function() {
+    p <- length(data1$Degrees[data1$Degrees == "W"])/65
+    mu <- 30*p
+    si <- sqrt(30*p*(1-p))
+    alfa <- 0.05
+    n <- length(degrees)
+    t <- qt(1 - alfa/2, df = n - 1)
+    mu + c(-1, 1) * si / sqrt(n) * t
+}
+
+
 zadanie2i <- function(pattern) {
     mean(as.numeric(as.character(data1[data1$Degrees == pattern,]$Salaries)))
 }
@@ -273,11 +286,12 @@ saveToPNG(
         col="forestgreen"))
 writeln(c("f) P(X < 8) = ", zadanie2f(7)));
 writeln(c("g) P(X < 8) = ", zadanie2g(7)));
+writeln(c("h) Przedział ufności: [", toString(zadanie2h()), "]"), " ")
 writeln("i) Średnie wynagrodzenia");
-writeln(c("   - Podstawowe:     " , zadanie2i("P")))
-writeln(c("   - Zawodowe:       " , zadanie2i("Z")))
-writeln(c("   - Średnie:        " , zadanie2i("Sr")))
-writeln(c("   - Wyższe:         " , zadanie2i("W")))
+writeln(c("   - Podstawowe:      " , zadanie2i("P")))
+writeln(c("   - Zawodowe:        " , zadanie2i("Z")))
+writeln(c("   - Średnie:         " , zadanie2i("Sr")))
+writeln(c("   - Wyższe:          " , zadanie2i("W")))
 
 
 # , freq = T, breaks = rangeTable, xlim=c(floor(rangeLeft), ceiling(rangeRight)), col="forestgreen", xlab="Wartości", ylab="Liczebność", main="Histogram liczebności")
