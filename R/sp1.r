@@ -178,7 +178,9 @@ saveToPNG(
 
 writeln(c("i) Przedział ufności: [", toString(zadanie1i()), "]"), " ")
 writeln(c("j) P(4<X<5):          ", pnorm(5, mean=salary.avg, sd=salary.stddev) - (pnorm(4, mean=salary.avg, sd=salary.stddev))));
-writeln(c("k) P = ", pnorm(30*5,mean=30*salary.avg,sd=salary.stddev)-pnorm(30*4,mean=30*salary.avg,sd=salary.stddev)));
+#writeln(c("k) P = ", pnorm(30*5,mean=30*salary.avg,sd=salary.stddev)-pnorm(30*4,mean=30*salary.avg,sd=salary.stddev)));
+writeln(c("k) P = ", pnorm(5,mean=salary.avg,sd=salary.stddev/sqrt(30))-pnorm(4,mean=salary.avg,sd=salary.stddev/sqrt(30))));
+
 
 writeln("");
 
