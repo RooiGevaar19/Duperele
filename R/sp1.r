@@ -240,9 +240,14 @@ zadanie2g <- function(x) {
     p <- length(data1$Degrees[data1$Degrees == "W"])/65
     mu <- 30*p
     si <- sqrt(30*p*(1-p))
-    print(mu)
-    print(si)
-    y <- pnorm(x, mean=mu, sd=si)# - pnorm(0, mean=mu, sd=si)
+    y <- pnorm(x+0.5, mean=mu, sd=si) - pnorm(0-0.5, mean=mu, sd=si)
+}
+
+zadanie2i <- function(pattern) {
+    group <- data1[data1$Degrees == pattern,]
+    cat(group[,"Salaries"])
+    avg <- mean(group[,1])
+    avg
 }
 
 # robota
@@ -272,6 +277,8 @@ saveToPNG(
         col="forestgreen"))
 writeln(c("f) P(X < 8) = ", zadanie2f(7)));
 writeln(c("g) P(X < 8) = ", zadanie2g(7)));
+writeln("i) Średnie wynagrodzenia");
+writeln(c("   - Podstawowe:                " , zadanie2i("P")))
 
 # , freq = T, breaks = rangeTable, xlim=c(floor(rangeLeft), ceiling(rangeRight)), col="forestgreen", xlab="Wartości", ylab="Liczebność", main="Histogram liczebności")
 
