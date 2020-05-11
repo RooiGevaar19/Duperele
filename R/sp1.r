@@ -204,7 +204,6 @@ IntToStr <- function(x) {
 
 degrees <- lapply(data1$Degrees, StrToInt)
 degrees <- unlist(degrees)
-degrees
 
 degs <- degrees
 
@@ -244,10 +243,7 @@ zadanie2g <- function(x) {
 }
 
 zadanie2i <- function(pattern) {
-    group <- data1[data1$Degrees == pattern,]
-    cat(group[,"Salaries"])
-    avg <- mean(group[,1])
-    avg
+    mean(as.numeric(as.character(data1[data1$Degrees == pattern,]$Salaries)))
 }
 
 # robota
@@ -278,7 +274,11 @@ saveToPNG(
 writeln(c("f) P(X < 8) = ", zadanie2f(7)));
 writeln(c("g) P(X < 8) = ", zadanie2g(7)));
 writeln("i) Średnie wynagrodzenia");
-writeln(c("   - Podstawowe:                " , zadanie2i("P")))
+writeln(c("   - Podstawowe:     " , zadanie2i("P")))
+writeln(c("   - Zawodowe:       " , zadanie2i("Z")))
+writeln(c("   - Średnie:        " , zadanie2i("Sr")))
+writeln(c("   - Wyższe:         " , zadanie2i("W")))
+
 
 # , freq = T, breaks = rangeTable, xlim=c(floor(rangeLeft), ceiling(rangeRight)), col="forestgreen", xlab="Wartości", ylab="Liczebność", main="Histogram liczebności")
 
