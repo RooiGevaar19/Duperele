@@ -1,3 +1,4 @@
+# Paweł Lipkowski, 238181
 # technicznie
 
 arrayToStr <- function(array) {
@@ -105,8 +106,12 @@ for (i in 2:length(counts)) {
 salary.density <- function(x) {
     dnorm(x, mean=salary.avg, sd=salary.stddev)
 }
+salary.dist <- function(x) {
+    pnorm(x, mean=salary.avg, sd=salary.stddev)
+}
 norm1x <- seq(2, 12, 0.1)
 norm1y <- salary.density(norm1x)
+norm1z <- salary.dist(norm1x)
 
 # 1h - empiryczna
 salary.empiric <- ecdf(salary)
@@ -160,7 +165,7 @@ saveToPNG(
     "Wykres_1E",
     hist(salary, freq = T, breaks = rangeTable, xlim=c(floor(rangeLeft), ceiling(rangeRight)), col="forestgreen", xlab="Wartości", ylab="Liczebność", main="Histogram liczebności"))
 
-writeln("f) Histogram gęstości + funkcja gęstości rozkładu normalnego");
+writeln("f) Histogram gęstości + wykres gęstosci rozkładu normalnego");
 
 saveToPNG(
     "Wykres_1F",
@@ -170,11 +175,11 @@ saveToPNG(
 writeln("g) Wykres pudełkowy");
 saveToPNG("Wykres_1G", boxplot(salary, main="Wykres pudełkowy", ylim=c(floor(rangeLeft), ceiling(rangeRight)), col="green"))
 
-writeln("h) Dystrybuanta empiryczna + funkcja gęstości rozkładu normalnego");
+writeln("h) Dystrybuanta empiryczna + dystrybuanta rozkładu normalnego");
 saveToPNG(
     "Wykres_1H",
-    plot(salary.empiric, xlim=c(floor(rangeLeft), ceiling(rangeRight)), col="orange", xlab="Wartości", ylab="Gęstość"),
-    lines(norm1x, norm1y, col = "red"))
+    plot(salary.empiric, xlim=c(floor(rangeLeft), ceiling(rangeRight)), col="orange", xlab="Wartości", ylab="Gęstość", main="Dystrybuanty empiryczna oraz rozkładu normalnego"),
+    lines(norm1x, norm1z, col = "red"))
 
 writeln(c("i) Przedział ufności: [", toString(zadanie1i()), "]"), " ")
 writeln(c("j) P(4<X<5):          ", pnorm(5, mean=salary.avg, sd=salary.stddev) - (pnorm(4, mean=salary.avg, sd=salary.stddev))));
@@ -297,5 +302,5 @@ writeln(c("   - Wyższe:          " , zadanie2i("W")))
 
 
 # , freq = T, breaks = rangeTable, xlim=c(floor(rangeLeft), ceiling(rangeRight)), col="forestgreen", xlab="Wartości", ylab="Liczebność", main="Histogram liczebności")
-
+# Paweł Lipkowski, 238181
 
