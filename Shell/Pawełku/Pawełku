@@ -1,0 +1,27 @@
+#!/bin/bash
+
+function showhelp() {
+	echo "Już Ci mówię, słonko."
+}
+
+if [[ $# -eq 1 ]]; then
+	case $1 in
+        "pomocy")       
+     		echo "Już spokojnie, Zala."
+			showhelp
+            ;;
+        *) 
+			echo "Cooo?"            
+    esac 
+elif [[ $# -ge 3 ]] ; then
+	case $1 in
+        "wyłącz")       
+     		if [[ "$2" == "komputer" ]] ; then
+				echo "Okay. <3";
+				shutdown -h now
+			fi
+            ;;
+        *) 
+			echo "Cooo?"            
+    esac
+fi

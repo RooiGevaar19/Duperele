@@ -14,7 +14,7 @@ void game(int Candies[], int n) {
     bool AliceMoves = 1; 
 
     while (cursorAlice < cursorBob) {
-        moves++;
+        if (cursorBob - cursorAlice > 1) moves++;
         if (AliceMoves) {
             int i = 0;
             while (i <= howMuch && cursorAlice < cursorBob) {

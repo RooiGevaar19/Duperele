@@ -14,7 +14,7 @@ void game(int Candies[], int n) {
     bool AliceMoves = 1; 
 
     while (cursorAlice < cursorBob) {
-        moves++;
+        if (cursorBob - cursorAlice > 1) moves++;
         cout << "Move " << moves << endl;
         if (AliceMoves) {
             cout << "Alice moves." << endl;
@@ -61,6 +61,7 @@ void game(int Candies[], int n) {
             cout << "Bob's overall score is " << scoreBob << ". Next move." << endl << endl;
             howMuch = i;
         }
+        cout << "Positions of Alice is " << cursorAlice << " and Bob is " << cursorBob << ". Next move." << endl;
         AliceMoves = !(AliceMoves);
     }
     cout << "Game over." << endl;
