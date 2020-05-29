@@ -9,7 +9,7 @@ L = mu - qt(1-alpha/2, df=n-1)*(si/sqrt(n-1))
 U = mu + qt(1-alpha/2, df=n-1)*(si/sqrt(n-1))
 
 cat("Zadanie 1", end='\n')
-cat(c("Przedział ufności: [", L,'; ',U,']' ),sep='',end='\n')
+cat(c("Przedział ufności: (",L,'; ',U,')' ),sep='',end='\n')
 
 # Zadanie 2
 
@@ -21,4 +21,4 @@ L = (n*si2)/qchisq(alpha/2,df=n-1)
 U = (n*si2)/qchisq(1-alpha/2,df=n-1)
 
 cat("Zadanie 2", end='\n')
-cat(c("Przedział ufności: [", U,'; ',L,']' ),sep='',end='\n')
+cat(c("Przedział ufności: (",U,'; ',L,')' ),sep='',end='\n')
