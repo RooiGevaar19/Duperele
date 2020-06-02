@@ -1,4 +1,7 @@
 # Paweł Lipkowski, 238181
+# Sprawdzian 1
+
+# ==============================
 # technicznie
 
 arrayToStr <- function(array) {
