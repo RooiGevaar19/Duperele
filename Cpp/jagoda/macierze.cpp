@@ -31,7 +31,7 @@ int main() {
         for (int i = 0; i < k; i++) {
             for (int j = 0; j < m; j++) {
                 cout << "Podaj wyraz (" << i+1 << ", " << j+1 << ") macierzy B: ";
-                cin >> A[i][j];
+                cin >> B[i][j];
             }
         }
 
@@ -44,11 +44,11 @@ int main() {
             }
         }
     
-        cout << "WYNIK:";
+        cout << "WYNIK:" << endl;
         for (int i = 0; i < n; i++) {
             cout << "[ ";
-            for (int j = 0; j < k; j++) {
-                cout << A[i][j] << " ";
+            for (int j = 0; j < m; j++) {
+                cout << S[i][j] << " ";
             }
             cout << "]" << endl;
         }
