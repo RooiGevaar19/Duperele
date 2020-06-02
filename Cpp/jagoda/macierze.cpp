@@ -21,6 +21,8 @@ int main() {
     } else {
         int A[n][k];
         int B[k][m];
+
+        // podaj macierze A i B
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < k; j++) {
                 cout << "Podaj wyraz (" << i+1 << ", " << j+1 << ") macierzy A: ";
@@ -35,20 +37,28 @@ int main() {
             }
         }
 
+        // zadeklaruj macierz wynikową S
         int S[n][m];
+
+        // wyzeruj macierz wynikową
         for (int i=0; i<n; i++) {
             for (int j=0; j<m; j++) {
                 S[i][j] = 0;
             }
         }
+
+        // dla każdego wiersza S
         for (int i=0; i<n; i++) {
+            // dla każdej kolumny S
             for (int j=0; j<m; j++) {
+                // S[i][j] = i-ty wiersz A * j-ta kolumna B
                 for (int step=0; step<k; step++) {
                     S[i][j] += A[i][step] * B[step][j];
                 }
             }
         }
     
+        // wypisz macierz S
         cout << "WYNIK:" << endl;
         for (int i = 0; i < n; i++) {
             cout << "[ ";
