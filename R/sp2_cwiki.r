@@ -59,5 +59,5 @@ writeln(c("   - Przedział ufności wariancji: (" , U, ', ', L, ')'))
 
 writeln("c)");
 
-sqrt(lambda.len-1)/(2*lambda.sd)
+2*pt(sqrt(lambda.len-1)/(2*lambda.sd), df=lambda.len-1)
 
