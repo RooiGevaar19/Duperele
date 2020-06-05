@@ -8,7 +8,7 @@ lim = 45000
 alpha = 0.03
 
 val1 <- ((Mu-lim)*sqrt(n-1))/Si
-val2 <- pt(alpha, n-1) # dla hipotezy alternatywnej <=
+val2 <- qt(alpha, n-1) # dla hipotezy alternatywnej <=
 val1
 val2
 val1 <= -val2
@@ -25,7 +25,7 @@ alpha = 0.07
 lim = 0.45
 
 val1 <- (n*Si)/lim
-val2 <- pchisq(alpha, n-1)
+val2 <- qchisq(alpha, n-1)
 val1
 val2
 val1 >= val2
