@@ -1,4 +1,3 @@
-Paulina Magdalena Pajączkowska  nr indeksu: 266458
 
 1)
 
@@ -14,6 +13,7 @@ int main()
 }
 
 2)
+
 #include<iostream>
 using namespace std;
 void potrojimy_liczbe(int* n)
