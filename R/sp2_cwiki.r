@@ -59,5 +59,41 @@ writeln(c("   - Przedział ufności wariancji: (" , U, ', ', L, ')'))
 
 writeln("c)");
 
-2*pt(sqrt(lambda.len-1)/(2*lambda.sd), df=lambda.len-1)
+zadanie1c <- function(alfa) {
+    abs(diff(lambda.avg + c(-1, 1) * lambda.sd / sqrt(lambda.len-1) * qnorm(1-alfa/2)))
+}
+
+writeln(c(0.00000003762, " ", zadanie1c(0.00000003762)));
+writeln(c(0.00000003763, " ", zadanie1c(0.00000003763)));
+writeln(c(0.00000003764, " ", zadanie1c(0.00000003764)));
+
+# 1d
+zadanie1d_war <- function(n) {
+  abs(diff((n-1) * 1/qchisq(c(1-alpha/2, alpha/2),df=n-1) * lambda.var))
+}
+
+zadanie1d_avg <- function(n) {
+  abs(diff(round(lambda.avg+c(-1,1)*lambda.sd/sqrt(n-1)*qnorm(.975),2)))
+}
+
+zadanie1d_war(6);
+zadanie1d_war(7);
+
+zadanie1d_avg(1);
+zadanie1d_avg(2);
+zadanie1d_avg(3);
+zadanie1d_avg(4);
+zadanie1d_avg(5);
+zadanie1d_avg(6);
+
+# 1e
+
+# Zadanie 2
+
+writeln("Zadanie 2"); 
+writeln("a)");
+t.test(x = gwozdzie_lambda, y = gwozdzie_mu, alternative = c("two.sided"), var.equal = TRUE, conf.level = 1-alpha)
+
+writeln("b)");
+var.test(x = gwozdzie_lambda, y = gwozdzie_mu, alternative = c("two.sided"), var.equal = TRUE, conf.level = 1-alpha)
 
