@@ -165,10 +165,11 @@ zadanie2b <- function(dane, i, threshold) {
     (m1/n - p0)/(sqrt((p0*(1-p0))/n))
 }
 
+prog <- 0.38
 for (i in 1:ncol(dane)) {
     writeln(c("TYDZIEN ", toString(i)));
-    writeln(c("Wartość statystyki: ", zadanie2b(dane, i, 0.38)));
-    writeln(c("P-wartość: ", min(c(2*pnorm(zadanie2b(dane, i, 0.38)), 2*(1-pnorm(zadanie2b(dane, i, 0.38)))))));
+    writeln(c("Wartość statystyki: ", zadanie2b(dane, i, prog)));
+    writeln(c("P-wartość: ", min(c(2*pnorm(zadanie2b(dane, i, prog)), 2*(1-pnorm(zadanie2b(dane, i, prog)))))));
 
 }
 
