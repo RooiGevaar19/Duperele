@@ -93,15 +93,23 @@ m0 = 7
 # jeszcze inny sposób, t-wartość statystyki 
 t <- ((mean(gwozdzie_lambda)-7)/sd(gwozdzie_lambda)*sqrt(lambda.len))
 t
+
+writeln("nowy !=")
+t.test(x = gwozdzie_lambda, alternative = c("two.sided"), mu = m0, conf.level = 1-alpha)
 #zbiór krytyczny rózna; kwantyle
 qt(alpha/2,lambda.len-1)
 qt(1-alpha/2,lambda.len-1)
 #przedzialy to -inf do qt(alfa/2,n-1) suma qt(1-alfa/2,n-1) do inf
-# t nie należy do przedziału, więc nie odrzucamy H_0
+
+
+writeln("nowy >")
+t.test(x = gwozdzie_lambda, alternative = c("greater"), mu = m0, conf.level = 1-alpha)
 #zbiór krytyczny m > m_0  kwantyl
 qt(1-alpha, lambda.len-1)
 #przedział to od kwantyl do inf
-#t należy do przedziału, więc przyjmujemy H_1
+
+# t nie należy do przedziału, więc nie odrzucamy H_0
+# t należy do przedziału, więc przyjmujemy H_1
 
 # ==============================
 # ZADANIE 2
