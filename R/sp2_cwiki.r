@@ -168,15 +168,10 @@ zadanie2b <- function(dane, i, threshold) {
 for (i in 1:ncol(dane)) {
     writeln(c("TYDZIEN ", toString(i)));
     writeln(c("Wartość statystyki: ", zadanie2b(dane, i, 0.38)));
+    writeln(c("P-wartość: ", min(c(2*pnorm(zadanie2b(dane, i, 0.38)), 2*(1-pnorm(zadanie2b(dane, i, 0.38)))))));
 
 }
 
 writeln("");
 writeln("c)");
 
-#OBLICZANIE p-value
-# to w nawiasie to wartość statystyki danego tygodnia
-# otrzymujemy 2 wyniki i mnijeszy z nich to nasze p-value
-#tydzień 1
-2*pnorm(0.62) 
-2*(1-pnorm(0.62))
