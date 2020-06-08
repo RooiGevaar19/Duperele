@@ -157,7 +157,7 @@ for (i in 1:ncol(dane)) {
 writeln("");
 writeln("b)");
 
-zadanie2b <- function(dane, i, threshold) {
+zadanie3b <- function(dane, i, threshold) {
     m1 <- dane[2,i]
     n <- dane[1,i]
     p0 <- threshold
@@ -168,11 +168,20 @@ zadanie2b <- function(dane, i, threshold) {
 prog <- 0.38
 for (i in 1:ncol(dane)) {
     writeln(c("TYDZIEN ", toString(i)));
-    writeln(c("Wartość statystyki: ", zadanie2b(dane, i, prog)));
-    writeln(c("P-wartość: ", min(c(2*pnorm(zadanie2b(dane, i, prog)), 2*(1-pnorm(zadanie2b(dane, i, prog)))))));
+    writeln(c("Wartość statystyki: ", zadanie3b(dane, i, prog)));
+    writeln(c("P-wartość: ", min(c(2*pnorm(zadanie3b(dane, i, prog)), 2*(1-pnorm(zadanie3b(dane, i, prog)))))));
 
 }
 
 writeln("");
 writeln("c)");
+
+kolA <- 1          # pierwsza kolumna
+kolB <- ncol(dane) # ostatnia kolumna
+dane[,c(kolA, kolB)]
+chisq.test(dane[,c(kolA, kolB)])
+
+writeln("");
+writeln("d)");
+chisq.test(dane)
 
