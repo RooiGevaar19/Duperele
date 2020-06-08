@@ -114,12 +114,18 @@ qt(1-alpha, lambda.len-1)
 # ==============================
 # ZADANIE 2
 
+mu.len <- length(gwozdzie_mu)
+
 writeln("Zadanie 2"); 
 writeln("a)");
 t.test(x = gwozdzie_lambda, y = gwozdzie_mu, alternative = c("two.sided"), var.equal = TRUE, conf.level = 1-alpha)
+qt(alpha/2,lambda.len+mu.len-2)
+qt(1-alpha/2,lambda.len+mu.len-2)
 
 writeln("b)");
 var.test(x = gwozdzie_lambda, y = gwozdzie_mu, alternative = c("two.sided"), var.equal = TRUE, conf.level = 1-alpha)
+qf(alpha, df1=lambda.len-1, df2=mu.len-1)
+qf(1-alpha, df1=lambda.len-1, df2=mu.len-1)
 
 # ==============================
 # ZADANIE 3
@@ -195,6 +201,8 @@ for (i in 1:ncol(dane)) {
 
 }
 
+qnorm(c(0, alpha/2, 1 - alpha/2, 1))
+
 writeln("");
 writeln("c)");
 
@@ -202,8 +210,11 @@ kolA <- 1          # pierwsza kolumna
 kolB <- ncol(dane) # ostatnia kolumna
 dane[,c(kolA, kolB)] # obcinamy macierz do kolumn A i B
 chisq.test(dane[,c(kolA, kolB)])
+qchisq(p=1-alpha, df=1)
 
 writeln("");
 writeln("d)");
 chisq.test(dane)
+(ncol(dane)-1)*(nrow(dane)-1)
+qchisq(p=1-alpha, df=(ncol(dane)-1)*(nrow(dane)-1))
 
