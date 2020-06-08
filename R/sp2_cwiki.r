@@ -88,6 +88,21 @@ zadanie1d_avg(6);
 
 # 1e
 
+writeln("e)");
+m0 = 7
+# jeszcze inny sposób, t-wartość statystyki 
+t <- ((mean(gwozdzie_lambda)-7)/sd(gwozdzie_lambda)*sqrt(lambda.len))
+t
+#zbiór krytyczny rózna; kwantyle
+qt(alpha/2,lambda.len-1)
+qt(1-alpha/2,lambda.len-1)
+#przedzialy to -inf do qt(alfa/2,n-1) suma qt(1-alfa/2,n-1) do inf
+# t nie należy do przedziału, więc nie odrzucamy H_0
+#zbiór krytyczny m > m_0  kwantyl
+qt(1-alpha, lambda.len-1)
+#przedział to od kwantyl do inf
+#t należy do przedziału, więc przyjmujemy H_1
+
 # Zadanie 2
 
 writeln("Zadanie 2"); 
@@ -97,3 +112,71 @@ t.test(x = gwozdzie_lambda, y = gwozdzie_mu, alternative = c("two.sided"), var.e
 writeln("b)");
 var.test(x = gwozdzie_lambda, y = gwozdzie_mu, alternative = c("two.sided"), var.equal = TRUE, conf.level = 1-alpha)
 
+writeln("Zadanie 3"); 
+
+dane_raw <- c(1092, 412, 825, 305, 997, 381, 952, 354, 1088, 435, 1104, 408, 1146, 467, 825, 334)
+dane <- matrix(dane_raw,nrow=2)
+
+dane
+
+writeln("a)");
+
+zadanie3a_poparcie <- function(dane, i) {
+    dane[2,i]/dane[1,i]
+}
+
+zadanie3a_przedzial_ufnosci_lewy <- function(dane, i, alfa) {
+    n <- dane[1,i]
+    p.poparcia <- zadanie3a_poparcie(dane, i)
+    kwantyl <- qt(1-alfa/2, n)
+    a <- p.poparcia - kwantyl * sqrt((p.poparcia*(1-p.poparcia))/n)
+
+    a
+}
+
+zadanie3a_przedzial_ufnosci_prawy <- function(dane, i, alfa) {
+    n <- dane[1,i]
+    p.poparcia <- zadanie3a_poparcie(dane, i)
+    kwantyl <- qt(1-alfa/2, n)
+    b <- p.poparcia + kwantyl * sqrt((p.poparcia*(1-p.poparcia))/n)
+
+    b
+}
+
+for (i in 1:ncol(dane)) {
+    writeln(c("TYDZIEN ", toString(i)));
+    write("Poparcie: ");
+    writeln(zadanie3a_poparcie(dane, i)*100);
+    write("Przedział ufności: (");
+    write(zadanie3a_przedzial_ufnosci_lewy(dane, i, alpha)*100);
+    write(", "); 
+    write(zadanie3a_przedzial_ufnosci_prawy(dane, i, alpha)*100);
+    writeln(")");
+}
+
+writeln("");
+writeln("b)");
+
+zadanie2b <- function(dane, i, threshold) {
+    m1 <- dane[2,i]
+    n <- dane[1,i]
+    p0 <- threshold
+    #wartość statytsyki 
+    (m1/n - p0)/(sqrt((p0*(1-p0))/n))
+}
+
+for (i in 1:ncol(dane)) {
+    writeln(c("TYDZIEN ", toString(i)));
+    writeln(c("Wartość statystyki: ", zadanie2b(dane, i, 0.38)));
+
+}
+
+writeln("");
+writeln("c)");
+
+#OBLICZANIE p-value
+# to w nawiasie to wartość statystyki danego tygodnia
+# otrzymujemy 2 wyniki i mnijeszy z nich to nasze p-value
+#tydzień 1
+2*pnorm(0.62) 
+2*(1-pnorm(0.62))
