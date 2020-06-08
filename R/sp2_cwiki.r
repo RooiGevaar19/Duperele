@@ -103,7 +103,8 @@ qt(1-alpha, lambda.len-1)
 #przedział to od kwantyl do inf
 #t należy do przedziału, więc przyjmujemy H_1
 
-# Zadanie 2
+# ==============================
+# ZADANIE 2
 
 writeln("Zadanie 2"); 
 writeln("a)");
@@ -112,12 +113,18 @@ t.test(x = gwozdzie_lambda, y = gwozdzie_mu, alternative = c("two.sided"), var.e
 writeln("b)");
 var.test(x = gwozdzie_lambda, y = gwozdzie_mu, alternative = c("two.sided"), var.equal = TRUE, conf.level = 1-alpha)
 
+# ==============================
+# ZADANIE 3
+
 writeln("Zadanie 3"); 
 
+# Dane
 dane_raw <- c(1092, 412, 825, 305, 997, 381, 952, 354, 1088, 435, 1104, 408, 1146, 467, 825, 334)
 dane <- matrix(dane_raw,nrow=2)
 
 dane
+
+# Zadania
 
 writeln("a)");
 
@@ -178,7 +185,7 @@ writeln("c)");
 
 kolA <- 1          # pierwsza kolumna
 kolB <- ncol(dane) # ostatnia kolumna
-dane[,c(kolA, kolB)]
+dane[,c(kolA, kolB)] # obcinamy macierz do kolumn A i B
 chisq.test(dane[,c(kolA, kolB)])
 
 writeln("");
