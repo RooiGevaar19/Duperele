@@ -119,7 +119,14 @@ var.test(x = gwozdzie_lambda, y = gwozdzie_mu, alternative = c("two.sided"), var
 writeln("Zadanie 3"); 
 
 # Dane
-dane_raw <- c(1092, 412, 825, 305, 997, 381, 952, 354, 1088, 435, 1104, 408, 1146, 467, 825, 334)
+dane_raw <- c(1092, 412, 
+              825,  305, 
+              997,  381, 
+              952,  354, 
+              1088, 435, 
+              1104, 408, 
+              1146, 467, 
+              825,  334)
 dane <- matrix(dane_raw,nrow=2)
 
 dane
