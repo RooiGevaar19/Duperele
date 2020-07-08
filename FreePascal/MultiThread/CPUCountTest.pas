@@ -56,6 +56,7 @@ begin
     {$ELSE}
     getCPUs := sysconf(83); 
     {$ENDIF}
+    //getCPUs := 4;
 end;
 
 function findSumAsync(T : array of NumberType) : NumberType;
