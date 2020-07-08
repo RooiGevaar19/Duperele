@@ -116,7 +116,7 @@ begin
     SetLength(T, getCPUs * factor);
     for i := 0 to Length(T)-1 do
         T[i] := random;
-    writeln('Sum (async): ', findSumAsync(T):2:mask);
-    writeln('Sum (sync) : ', findSumSync(T):2:mask);
+    writeln('Sum (single-threaded): ', findSumAsync(T):2:mask);
+    writeln('Sum (multi-threaded) : ', findSumSync(T):2:mask);
     SetLength(T, 0);
 end.
