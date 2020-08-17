@@ -40,7 +40,7 @@ begin
             write('*')
         end;
     until pwchar = #13;
-    readPassword := pwstring;
+    Result := pwstring;
 end;
 
 function readlnPassword() : String;
@@ -59,7 +59,12 @@ begin
         end;
     until pwchar = #13;
     writeln();
-    readlnPassword := pwstring;
+    Result := pwstring;
+end;
+
+function authenticate(input : String) : Boolean;
+begin
+    Result := input = 'papiesz';
 end;
 
 var 
@@ -70,7 +75,8 @@ begin
     begin
         write('Podaj hasło: ');
         input := readlnPassword();
-        if (input = 'papiesz') then Break;
+        if (authenticate(input)) then Break;
         writeln('Złe hasło.');
     end;
+    writeln('Dobre hasło! <3 XD');
 end.
