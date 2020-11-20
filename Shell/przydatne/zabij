@@ -1,0 +1,23 @@
+#!/bin/bash
+if [ "$1" == "sie" ]
+then
+	echo "Naucz się pisać."
+elif [ "$1" == "się" ]
+then
+	echo "Sam się zabij."
+	shutdown -h now
+elif [ "$1" == "procesy" ]
+then
+	if [ "a$2" == "a" ]
+	then
+		echo "Jakie mam ja procesy zabić?"
+	else
+		echo "NAPIERDALAMY!!!1"
+		pentakill $2
+	fi
+elif [ "a$1" == "a" ]
+then
+	echo "Co mam zabić?"
+else
+	echo "Co kurwa?!"
+fi

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [[ $# -eq 1 ]]; then
+	ps ax | grep -P $1 | cut -c 1-5 | xargs kill -9;
+elif [[ $# -ge 2 ]]; then
+	case "$2" in
+		"-f" ) ps ax | grep -P $1 | cut -c 1-5 | xargs kill -9 ;;
+		"-r" ) ps ax | grep -P $1 | cut -c 1-5 | sort -nr | xargs kill -9 ;;
+		"-F" ) ps ax | grep -P $1 | grep -Pv monita | cut -c 1-5 | xargs kill -9 ;;
+		"-R" ) ps ax | grep -P $1 | grep -Pv monita | cut -c 1-5 | sort -nr | xargs kill -9 ;;
+		* ) ;;
+	esac
+else
+	echo "pentakill: I don't know, what to do.";
+	echo "Execute: pentakill %procname [%flag]";
+	echo;
+	echo "Available flags:";
+	echo "  -f        : Remove all processes starting from lowest PID numbers to highest"
+	echo "  -r        : Remove all processes starting from highest PID numbers to lowest"
+	echo "  -F        : Same as -f, without removing \"monita\" processes"
+	echo "  -R        : Same as -r, without removing \"monita\" processes"
+	echo "  (no flag) : Same as -f";
+fi

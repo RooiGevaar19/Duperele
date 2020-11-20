@@ -1,0 +1,209 @@
+#!/bin/bash
+
+function display_confusion() {
+	echo "monita: I don't know, what to do.";
+	echo "Syntax: monita %time %procname [%flag]";
+	echo;
+	echo "Execute 'monita --help' to obtain help.";
+}
+
+function display_help() {
+	echo "Syntax: monita %time %procname [%flag]";
+	echo;
+	echo "The %time is the time, how long I will monit the processes (in secs, min value = 0)"
+	echo "The %procname is a Perl regex";
+	echo "Flags (in order to use multiple flags, just combine them e.g. '-tFS'):";
+	echo "  -a        : Count all processes";
+	echo "  -c        : Display CPU usage (in %, don't show a unit)";
+	echo "  -C        : Display CPU usage (in %, show a unit)";
+	echo "  -d        : Display memory usage (in %, don't show a unit)";
+	echo "  -D        : Display memory usage (in %, show a unit)";
+	echo "  -F        : Display memory usage (in the most relevant unit, e.g. 1.5 GB instead of 1,536 MB)";
+	echo "  -g        : Display memory usage (in GB, don't show a unit)";
+	echo "  -G        : Display memory usage (in GB, show a unit)";
+	echo "  -h        : Show help";
+	echo "  -k        : Display memory usage (in kB, don't show a unit)";
+	echo "  -K        : Display memory usage (in kB, show a unit)";
+	echo "  -m        : Display memory usage (in MB, don't show a unit)";
+	echo "  -M        : Display memory usage (in MB, show a unit)";
+	echo "  -n        : Show numerical order (starting with 0)";
+	echo "  -N        : Show numerical order (starting with 1)";
+	echo "  -s        : Don't consider monita itself";
+	echo "  -S        : Don't consider monita itself and all grep processes";
+	echo "  -t        : Show timestamp (Y/M/D H:M) before the result"
+	echo "  --help    : Show help";
+	echo "  (no flag) : Same as -a flag"
+}
+
+function list_proc() { 	#args - pattern removal wgrep
+	ps aux | grep -P $1 | grep -v $2 | grep -v $3
+}
+
+function format_output() { #args - unit divisor
+	awk -v unit="$1" -v divisor="$2" '{sum+=$6} END {sum/=divisor; if (sum==0) {print 0 unit;} else {print sum unit;}}'; 
+}
+
+function attempt_to_sleep() {
+	if [[ $1 -ne 1 ]]; then
+		sleep 1;
+	fi
+}
+
+
+# ----------- main -------------
+
+if [[ $# -eq 2 ]]; then
+	for i in `seq 1 1 $1` ; do
+		ps ax | grep -P $2 | wc -l; sleep 1;
+	done
+elif [[ $# -ge 3 ]] ; then
+
+	# Set options
+	if [[ ${BASH_ARGV[0]} =~ h || ${BASH_ARGV[0]} =~ --help ]] ; then display_help; exit; fi
+
+	if [[ ${BASH_ARGV[0]} =~ t ]] ; then tms="true"; else tms="false"; fi
+
+	if [[ ${BASH_ARGV[0]} =~ S ]] ; then
+		pattern=$2 
+		removal=$0
+		wgrep='grep'
+	elif [[ ${BASH_ARGV[0]} =~ s ]] ; then
+		pattern=$2 
+		removal=$0
+		wgrep='^(?![\s\S])'
+	else 
+		pattern=$2
+		removal='^(?![\s\S])' 
+		wgrep='^(?![\s\S])'
+	fi
+
+	if [[ ${BASH_ARGV[0]} =~ N ]]; then
+		substart=0
+	elif [[ ${BASH_ARGV[0]} =~ n ]]; then
+		substart=1
+	else
+		substart=-1
+	fi
+
+	timer=$1
+	if [[ $1 -le 0 ]]; then
+		timer=1
+	fi
+
+	# Print it
+
+	if [[ ${BASH_ARGV[0]} =~ k ]] ; then
+		for i in `seq 1 1 $timer` ; do
+			if [ $substart -ne -1 ] ; then order=$[$i - $substart]; echo -ne "$order\t"; fi
+			if [[ "$tms" == "true" ]] ; then echo -ne "$(date +'%Y/%m/%d %T')\t"; fi
+			list_proc $pattern $removal "$wgrep" | awk '{sum+=$6} END {if (sum==0) {print 0;} else {print sum;}}'; 
+			attempt_to_sleep $timer
+		done
+		exit
+	fi  
+	if [[ ${BASH_ARGV[0]} =~ K ]] ; then 
+		for i in `seq 1 1 $timer` ; do
+			if [ $substart -ne -1 ] ; then order=$[$i - $substart]; echo -ne "$order\t"; fi
+			if [[ "$tms" == "true" ]] ; then echo -ne "$(date +'%Y/%m/%d %T')\t"; fi
+			list_proc $pattern $removal "$wgrep" | awk '{sum+=$6} END {if (sum==0) {print "0 kB";} else {print sum " kB";}}'; 
+			attempt_to_sleep $timer
+		done
+		exit
+	fi 
+	if [[ ${BASH_ARGV[0]} =~ m ]] ; then 
+		for i in `seq 1 1 $timer` ; do
+			if [ $substart -ne -1 ] ; then order=$[$i - $substart]; echo -ne "$order\t"; fi
+			if [[ "$tms" == "true" ]] ; then echo -ne "$(date +'%Y/%m/%d %T')\t"; fi
+			list_proc $pattern $removal "$wgrep" | awk '{sum+=$6} END {sum/=1024; if (sum==0) {print 0;} else {print sum;}}'; 
+			attempt_to_sleep $timer
+		done
+		exit
+	fi  
+	if [[ ${BASH_ARGV[0]} =~ M ]] ; then 
+		for i in `seq 1 1 $timer` ; do
+			if [ $substart -ne -1 ] ; then order=$[$i - $substart]; echo -ne "$order\t"; fi
+			if [[ "$tms" == "true" ]] ; then echo -ne "$(date +'%Y/%m/%d %T')\t"; fi
+			list_proc $pattern $removal "$wgrep" | awk '{sum+=$6} END {sum/=1024; if (sum==0) {print "0 MB";} else {print sum " MB";}}'; 
+			attempt_to_sleep $timer
+		done
+		exit
+	fi 
+	if [[ ${BASH_ARGV[0]} =~ g ]] ; then 
+		for i in `seq 1 1 $timer` ; do
+			if [ $substart -ne -1 ] ; then order=$[$i - $substart]; echo -ne "$order\t"; fi
+			if [[ "$tms" == "true" ]] ; then echo -ne "$(date +'%Y/%m/%d %T')\t"; fi
+			list_proc $pattern $removal "$wgrep" | awk '{sum+=$6} END {sum/=1048576; if (sum==0) {print 0;} else {print sum;}}'; 
+			attempt_to_sleep $timer
+		done
+		exit
+	fi  
+	if [[ ${BASH_ARGV[0]} =~ G ]] ; then 
+		for i in `seq 1 1 $timer` ; do
+			if [ $substart -ne -1 ] ; then order=$[$i - $substart]; echo -ne "$order\t"; fi
+			if [[ "$tms" == "true" ]] ; then echo -ne "$(date +'%Y/%m/%d %T')\t"; fi
+			list_proc $pattern $removal "$wgrep" | awk '{sum+=$6} END {sum/=1048576; if (sum==0) {print "0 GB";} else {print sum " GB";}}'; 
+			attempt_to_sleep $timer
+		done
+		exit
+	fi
+	if [[ ${BASH_ARGV[0]} =~ d ]] ; then 
+		for i in `seq 1 1 $timer` ; do
+			if [ $substart -ne -1 ] ; then order=$[$i - $substart]; echo -ne "$order\t"; fi
+			if [[ "$tms" == "true" ]] ; then echo -ne "$(date +'%Y/%m/%d %T')\t"; fi
+			list_proc $pattern $removal "$wgrep" | awk '{sum+=$4} END {if (sum==0) {print 0;} else {print sum;}}'; 
+			attempt_to_sleep $timer
+		done
+		exit
+	fi  
+	if [[ ${BASH_ARGV[0]} =~ D ]] ; then 
+		for i in `seq 1 1 $timer` ; do
+			if [ $substart -ne -1 ] ; then order=$[$i - $substart]; echo -ne "$order\t"; fi
+			if [[ "$tms" == "true" ]] ; then echo -ne "$(date +'%Y/%m/%d %T')\t"; fi
+			list_proc $pattern $removal "$wgrep" | awk '{sum+=$4} END {if (sum==0) {print "0%";} else {print sum "%";}}'; 
+			attempt_to_sleep $timer
+		done
+		exit
+	fi 
+	if [[ ${BASH_ARGV[0]} =~ c ]] ; then
+		for i in `seq 1 1 $timer` ; do
+			if [ $substart -ne -1 ] ; then order=$[$i - $substart]; echo -ne "$order\t"; fi
+			if [[ "$tms" == "true" ]] ; then echo -ne "$(date +'%Y/%m/%d %T')\t"; fi
+			list_proc $pattern $removal "$wgrep" | awk '{sum+=$3} END {if (sum==0) {print 0;} else {print sum;}}'; 
+			attempt_to_sleep $timer
+		done
+		exit
+	fi  
+	if [[ ${BASH_ARGV[0]} =~ C ]] ; then 
+		for i in `seq 1 1 $timer` ; do
+			if [ $substart -ne -1 ] ; then order=$[$i - $substart]; echo -ne "$order\t"; fi
+			if [[ "$tms" == "true" ]] ; then echo -ne "$(date +'%Y/%m/%d %T')\t"; fi
+			list_proc $pattern $removal "$wgrep" | awk '{sum+=$3} END {if (sum==0) {print "0%";} else {print sum "%";}}'; 
+			attempt_to_sleep $timer
+		done
+		exit
+	fi 
+	if [[ ${BASH_ARGV[0]} =~ F ]] ; then 
+		for i in `seq 1 1 $timer` ; do
+			if [ $substart -ne -1 ] ; then order=$[$i - $substart]; echo -ne "$order\t"; fi
+			if [[ "$tms" == "true" ]] ; then echo -ne "$(date +'%Y/%m/%d %T')\t"; fi
+			list_proc $pattern $removal "$wgrep" | awk '{sum+=$6} END {if (sum==0) {print "0 kB";} else if (sum>=1048576) {print sum/1048576 " GB";} else if (sum>=1024) {print sum/1024 " MB";} else {print sum " kB";} }'; 
+			attempt_to_sleep $timer
+		done
+		exit
+	fi
+	#if [[ ${BASH_ARGV[0]} =~ a ]] ; then 
+		for i in `seq 1 1 $timer` ; do
+			if [ $substart -ne -1 ] ; then order=$[$i - $substart]; echo -ne "$order\t"; fi
+			if [[ "$tms" == "true" ]] ; then echo -ne "$(date +'%Y/%m/%d %T')\t"; fi
+			ps ax | grep -P $pattern | grep -v $removal | grep -v $wgrep | wc -l; 
+			attempt_to_sleep $timer
+		done
+		exit
+	#fi
+else
+	if [[ "$1" == "--help" ]]; then
+		display_help
+	else
+		display_confusion
+	fi
+fi
