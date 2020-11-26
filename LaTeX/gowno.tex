@@ -1,0 +1,53 @@
+\documentclass[12pt]{report}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{t1enc}
+
+
+\textwidth=16cm \textheight=23cm \oddsidemargin=0.5cm
+\topmargin=-1cm
+
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\def\R{\mathbb{R}} 
+
+\newtheorem{tw}{Twierdzenie}
+\newtheorem{lem}{Lemat}
+\newtheorem{wn}{Wniosek}
+\newtheorem{fakt}{Fakt}
+\newtheorem{uw}{Uwaga}
+\newtheorem{defin}{Definicja}
+\newtheorem{prz}{Przykład}
+\newenvironment{dow}{\par \noindent \emph{Dowód.\ }}{\hfill $\Box$ \par}
+
+\begin{document}
+	\thispagestyle{empty}
+	\begin{tw} 
+		\label{bolwei}
+		(Bolzano-Weierstrassa) \newline
+		Każdy ograniczony ciąg posiada \emph{podciag zbieżny}.
+	\end{tw}
+	\begin{dow}
+		Ależ to jest oczywiste. XDDD
+		$$\lim_{n\to\infty}f_n(x) = 21.37.$$
+	\end{dow}
+	\begin{tw} 
+		\label{abel}
+		(Abela) \newline
+		Jest niewarte uwagi.
+	\end{tw}
+	\begin{dow}
+		Tak jak w (\ref{bolwei}).
+		$$\lim_{n\to\infty}f_n(x) = 14.88.$$
+	\end{dow}
+	\begin{figure}[h]
+		\begin{center}
+			\includegraphics[width=2in, height=1in]{rys1.jpg}
+		\end{center}
+		\caption{To jest okrąg.}
+	\end{figure}
+\end{document}
