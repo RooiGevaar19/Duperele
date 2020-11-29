@@ -1,0 +1,41 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{blindtext}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+
+%\textwidth=8in \textheight=9in 
+%\oddsidemargin=0.5in
+%\topmargin=-1in
+
+\author{John Doe}
+\title{Untitled}
+\date{December 4, 2017} % use \date{\today} or comment this line to have a current date
+
+%\frenchspacing
+
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+
+\newtheorem{tw}{Twierdzenie}
+\newtheorem{lem}{Lemat}
+\newtheorem{wn}{Wniosek}
+\newtheorem{fakt}{Fakt}
+\newtheorem{uw}{Uwaga}
+\newtheorem{defin}{Definicja}
+\newtheorem{prz}{Przykład}
+\newenvironment{dow}{\par \noindent \emph{Dowód.\ }}{\hfill $\Box$ \par}
+
+\begin{document}
+    %\maketitle       % uncomment it to include the title page
+    %\tableofcontents % uncomment it to include the table of contents
+    \blindtext        % comment it to remove Lorem Ipsum
+    % --------------------------------------------------------------
+    % write document down below
+\end{document}
