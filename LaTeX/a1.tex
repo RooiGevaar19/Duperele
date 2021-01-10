@@ -1,0 +1,70 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{blindtext}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage[margin=0.5in]{geometry}
+
+%\textwidth=8in \textheight=9in 
+%\oddsidemargin=0.5in
+%\topmargin=-1in
+
+\author{Jan Kowalski}
+\title{Bez tytułu}
+
+\frenchspacing
+
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+
+\newtheorem{tw}{Twierdzenie}
+\newtheorem{lem}{Lemat}
+\newtheorem{wn}{Wniosek}
+\newtheorem{fakt}{Fakt}
+\newtheorem{uw}{Uwaga}
+\newtheorem{defin}{Definicja}
+\newtheorem{prz}{Przykład}
+\newenvironment{dow}{\par \noindent \emph{Dowód.\ }}{\hfill $\Box$ \par}
+
+\begin{document}
+	\maketitle
+	\newpage
+	\tableofcontents
+	\newpage
+	
+	\section{Pochodne}
+	Lagrange
+		
+	\section{Całki}
+	\begin{tw}
+		\label{O trzech ciągach}
+		Jeżeli mamy ciągi $(a_n)$, $(b_n)$, $(c_n)$ takie, że
+		$$ \forall_{n \in \N} \exists_{q \in \Q}  a_n \leqslant b_n < c_n \Rightarrow \lim_{n \rightarrow \infty} b_n \Leftrightarrow $$
+	\end{tw}
+	\begin{dow}
+		To jest oczywiste. $1\frac{4}{5} \cdot 2137$
+	\end{dow}
+	
+	\begin{cases}
+		$2x + y = 0$ & $x \geq 0$\\
+		$3x + y = -2$ & wpp \\
+	\end{cases}
+	
+	$$ \frac{x^4 + 1}{e^{2x} - \pi} < \varepsilon $$
+	
+	\subsection{Całki zwykłe}
+	\blindtext	
+	
+	\subsection{Całki niezwykłe}
+	\blindtext
+	
+	\section{Algebra liniowa}
+	Cronecker  
+	
+\end{document}
