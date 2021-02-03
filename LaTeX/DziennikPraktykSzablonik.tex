@@ -1,0 +1,154 @@
+\documentclass[a4paper,12pt]{article}
+
+% ========== PACZKI
+% podstawka
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amssymb}
+\usepackage{verse}
+\usepackage{epigraph}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage[margin=0.25in]{geometry} % margines strony 
+\usepackage{titling} % do użytku dowolnego tytułów
+
+% format daty
+\usepackage{datetime}
+\newdateformat{ymd}{\THEYEAR-\twodigit{\THEMONTH}-\twodigit{\THEDAY}}
+\newdateformat{mdy}{\twodigit{\THEMONTH}/\twodigit{\THEDAY}/\THEYEAR}
+\newdateformat{dmy}{\twodigit{\THEDAY}.\twodigit{\THEMONTH}.\THEYEAR}
+
+
+% liczniki do tabel
+\usepackage{tabularx}
+\usepackage{array,etoolbox}
+
+\preto\tabular{\setcounter{magicrownumbersA}{0}}
+\newcounter{magicrownumbersA}
+\newcommand\rownumberA{\stepcounter{magicrownumbersA}\arabic{magicrownumbersA}}
+
+\preto\tabular{\setcounter{magicrownumbersB}{0}}
+\newcounter{magicrownumbersB}
+\newcommand\rownumberB{\stepcounter{magicrownumbersB}\arabic{magicrownumbersB}}
+
+% kolorki 
+\usepackage{xcolor}
+\usepackage{colortbl}
+
+\definecolor{LightCyan}{rgb}{0.88,1,1}
+
+% hiperłącza
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    %urlcolor=cyan,
+    urlcolor=black,
+}
+
+% ============ Funkcje
+
+\frenchspacing
+
+\newcommand{\tytul}[1]{%
+	\begin{center}%
+	\LARGE\textbf{\MakeUppercase{#1}}%
+	\end{center}%
+}
+
+\newcommand{\mail}[1]{%
+    \href{mailto:me@#1}{#1}%
+}
+
+\newcommand{\pozycjaA}[8]{%
+    \hline %
+    #1 & #2 – #3 & #4 & #5 & #6 & #7 & #8 \\ %
+}
+
+\newcommand{\pozycjaB}[7]{%
+    \hline %
+    #1 & #2 – #3 & #4 & #5 & #6 & #7 \\ %
+}
+
+% ============ AUTORZY
+
+\author{Robert Johansson}
+\title{Dziennik praktyk}
+\date{\today}
+
+% ============ DOKUMENT
+
+\begin{document}
+    \begin{center}
+    	\tytul{\thetitle}
+    \end{center}
+
+    \begin{tabular}{l m{2in}}
+        \textbf{Data:}  & \dmy\today \\
+        \textbf{Autor:} & \theauthor \\
+    \end{tabular}
+
+    \section{Informacje o praktykancie:}
+    \begin{tabular}{l p{5in}}
+        \textbf{Imię i nazwisko:} & Robert Johansson \\ 
+        \textbf{Numer indeksu:}   & 232137 \\ 
+        \textbf{Uczelnia:}        & Uniwersytet Gdański \\ 
+        \textbf{Wydział:}         & Wydział Matematyki, Fizyki i Informatyki \\ 
+        \textbf{Kierunek:}        & Matematyka \\ 
+        \textbf{Specjalność:}     & nauczycielska \\
+        \textbf{Stopień:}         & studia licencjackie \\ 
+        \textbf{Rok studiów:}     & trzeci \\  
+        \textbf{Adres e-mail:}    & \mail{wasacz252@gmail.com} \\ 
+    \end{tabular}
+
+    \section{Informacje o szkole:}
+    \begin{tabular}{l p{5in}}
+        \textbf{Nazwa:}          & Szkoła Podstawowa 2137 w Wadowicach im. Jana Pawła 2 \\ 
+        \textbf{Rodzaj:}         & szkoła podstawowa \\ 
+        \textbf{Adres pocztowy:} & ul. Kremówki 21/37 42-137 Wadowice \\
+        \textbf{Adres e-mail:}   & \mail{sekretariat@spwadowice2137.pl} \\
+    \end{tabular}
+
+    \section{Informacje o opiekunie praktyk:}
+    \begin{tabular}{l m{2in}}
+        \textbf{Imię i nazwisko:} & Karol Wojtyła \\ 
+        \textbf{Adres e-mail:}    & \mail{pawulon2137@gmail.com} \\ 
+    \end{tabular}
+
+    \newpage
+    \section{Wykaz lekcji hospitowanych}
+
+    \tiny
+    \begin{tabularx}{\textwidth}{|@{\makebox[0.2in][r]{\rownumberA\space}} | c | c | c | c | c | X | X |}
+        \hline
+            \rowcolor{LightCyan}
+            \multicolumn{1}{|@{{\makebox[0.2in][c]{\colorbox{LightCyan}{Lp}}}} | c |}{Data} & Godziny zajęć & Klasa & Tryb zajęć & Nauczyciel prowadzący & Temat & Uwagi \\  
+            \pozycjaA{15.10.2020}{8:00}{8:45}{8c}{stacjonarne}{Petronella Iksińska}{Przekształcanie wzorów i wyznaczanie wartości}{}
+            \pozycjaA{15.10.2020}{8:50}{9:35}{8b}{stacjonarne}{Petronella Iksińska}{Równania, c.d.}{}
+            \pozycjaA{16.10.2020}{8:00}{8:45}{8c}{stacjonarne}{Petronella Iksińska}{Omówienie sprawdzianu}{}
+        \hline
+    \end{tabularx}
+
+    ~
+
+    ~
+
+    \section{Wykaz lekcji prowadzonych}
+
+    \tiny
+    \begin{tabularx}{\textwidth}{|@{\makebox[0.2in][r]{\rownumberB\space}} | c | c | c | c | X | X |}
+        \hline
+            \rowcolor{LightCyan}
+            \multicolumn{1}{|@{\makebox[0.2in][c]{\colorbox{LightCyan}{Lp}}} | c |}{Data} & Godziny zajęć & Klasa & Tryb zajęć & Temat & Uwagi \\
+            \pozycjaB{22.10.2020}{8:00}{8:45}{6a}{stacjonarne}{Kąty}{}
+            \pozycjaB{22.10.2020}{8:50}{9:35}{6a}{stacjonarne}{Kąty c.d.}{}
+            \pozycjaB{23.10.2020}{8:00}{8:45}{6a}{stacjonarne}{Kąty w trójkątach i czworokątach}{}
+            \pozycjaB{23.10.2020}{8:50}{9:35}{6b}{stacjonarne}{Pole równoległoboku i rombu}{}
+            \pozycjaB{23.10.2020}{9:45}{10:30}{6c}{stacjonarne}{Kąty w trójkątach i czworokątach}{}
+        \hline
+    \end{tabularx}
+
+\end{document}
