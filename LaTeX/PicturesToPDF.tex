@@ -1,0 +1,36 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage[margin=1.5in]{geometry}
+
+\author{Paweł Lipkowski}
+\title{Bind two documents}
+\date{\today} % use \date{\today} or comment this line to have a current date
+
+\newcommand{\BackgroundPic}[1]{%
+    \put(0,0){%
+    \parbox[b][\paperheight]{\paperwidth}{%
+        \vfill
+        \centering
+        \includegraphics[width=\paperwidth,height=\paperheight,%
+        keepaspectratio]{#1}%
+        \vfill
+    }}}
+
+
+\newcommand{\attachPicture}[1]{%
+    \AddToShipoutPicture*{\BackgroundPic{#1}} %
+    ~ %
+    \newpage %
+}
+
+\begin{document}
+    \pagenumbering{gobble}
+    % attach your photo scans here like this below
+    \attachPicture{Dorota.jpeg}
+    \attachPicture{Dorota1.jpeg}
+\end{document}
