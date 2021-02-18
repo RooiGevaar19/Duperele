@@ -5,12 +5,12 @@ using namespace std;
 string PrzeciwnaU2(string s)
 {
     int i;
-    for(i=0; i<8; i++) // zamiania zer na jedynki
+    for(i=0; i<8; i++) // zamiania zer na jedynki i jedynki na zera
         if(s[i] == '0') s[i] = '1';
         else s[i] = '0';
     s = '0'+s;
     i = 8;
-    while(s[i]=='1') // zamiana jedynki z prawej na zera i dopełnienie U2
+    while(s[i]=='1') // dopełnienie U2 - dodanie 1
     {
         s[i]='0';
         i--;
