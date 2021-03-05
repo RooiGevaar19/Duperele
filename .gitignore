@@ -5,3 +5,12 @@
 *.o
 *.png
 trash/
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.pdf
+*.snm
+*.synctex.gz
+*.toc
