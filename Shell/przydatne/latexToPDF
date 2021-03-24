@@ -1,0 +1,41 @@
+#!/bin/bash
+
+file=$1
+
+if [ ${file: -4} == ".tex" ] ; 
+then
+	latexmk $file -pdf
+	if [[ $? -eq 0 ]] ; then
+		fname="${file%%.*}"
+		rm "$fname.log"
+		rm "$fname.aux"
+		rm "$fname.fls"
+		rm "$fname.fdb_latexmk"
+		rm "$fname.dvi"
+		echo
+		echo "Done!"
+	else 
+		echo
+		echo "Error!"
+	fi
+else
+	echo "Usage: latexToPDF FILE"
+	echo
+	echo "Note: FILE must have a .tex extension!"
+fi
+
+
+
+# FILE="example.tar.gz"
+
+# ~% echo "${FILE%%.*}"
+# example
+# ~% echo "${FILE%.*}"
+# example.tar
+# ~% echo "${FILE#*.}"
+# tar.gz
+# ~% echo "${FILE##*.}"
+# gz
+
+
+
