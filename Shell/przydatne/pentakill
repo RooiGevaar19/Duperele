@@ -1,18 +1,19 @@
 #!/bin/bash
 
 if [[ $# -eq 1 ]]; then
-	ps ax | grep -P $1 | cut -c 1-5 | xargs kill -9;
+	ps ax | grep -P $1 | awk '{print $1}' | xargs kill -9;
 elif [[ $# -ge 2 ]]; then
 	case "$2" in
-		"-f" ) ps ax | grep -P $1 | cut -c 1-5 | xargs kill -9 ;;
-		"-r" ) ps ax | grep -P $1 | cut -c 1-5 | sort -nr | xargs kill -9 ;;
-		"-F" ) ps ax | grep -P $1 | grep -Pv monita | cut -c 1-5 | xargs kill -9 ;;
-		"-R" ) ps ax | grep -P $1 | grep -Pv monita | cut -c 1-5 | sort -nr | xargs kill -9 ;;
+		"-f" ) ps ax | grep -P $1 | awk '{print $1}' | xargs kill -9 ;;
+		"-r" ) ps ax | grep -P $1 | awk '{print $1}' | sort -nr | xargs kill -9 ;;
+		"-F" ) ps ax | grep -P $1 | grep -Pv monita | awk '{print $1}' | xargs kill -9 ;;
+		"-R" ) ps ax | grep -P $1 | grep -Pv monita | awk '{print $1}' | sort -nr | xargs kill -9 ;;
 		* ) ;;
 	esac
 else
-	echo "pentakill: I don't know, what to do.";
-	echo "Execute: pentakill %procname [%flag]";
+	PARENT_SCRIPT=`echo "$0" | rev | cut -d"/" -f1  | rev`
+	echo "$PARENT_SCRIPT: I don't know, what to do.";
+	echo "Execute: $PARENT_SCRIPT %procname [%flag]";
 	echo;
 	echo "Available flags:";
 	echo "  -f        : Remove all processes starting from lowest PID numbers to highest"
