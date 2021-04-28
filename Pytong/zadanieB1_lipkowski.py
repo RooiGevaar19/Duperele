@@ -4,7 +4,11 @@
 # 2021-04-28
 # ==============================
 
-from functools import reduce
+def iloczyn(T):
+    wynik = 1
+    for item in T:
+        wynik *= item
+    return wynik
 
 def nwd_2(a, b):
     while (b > 0):
@@ -26,7 +30,7 @@ def nww_N(T):
     if (len(T) == 1):
         return T[0]
     else:
-        return reduce(lambda x, y: x*y, T) // nwd_N(T)
+        return iloczyn(T) // nwd_N(T)
 
 def jestDodatniaCalkowita(x):
     try: 
