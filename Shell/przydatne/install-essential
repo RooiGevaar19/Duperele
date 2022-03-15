@@ -1,0 +1,28 @@
+#!/bin/bash
+
+apt update
+
+javaver=17
+
+apps=( 
+    cmus                 # command-line music player
+    filezilla            # program for accessing other ssh servers    
+    git                  # Git repositories
+    htop                 # a nice tool for monitoring the process
+    libreoffice          # Office programs
+    neofetch             # Neofetch, if you want to mock some arch users
+    openjdk-$javaver-jre # Java Runtime Environment
+    openjdk-$javaver-jdk # Java Development Kit
+    openssh-client       # OpenSSH Client
+    openssh-server       # OpenSSH Server
+    openttd              # OpenTTD!
+    #steam                # Steam for gaming
+    #virtualbox           # VirtualBox for virtual machines 
+    vlc                  # VLC video player 
+    wine                 # Wine for emulating Windows apps
+    xmoto                # XMoto!            
+)
+
+apt -f install
+
+apt install ${apps[*]}

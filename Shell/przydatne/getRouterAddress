@@ -1,0 +1,5 @@
+#!/bin/bash
+
+address=`route | grep default | while read c1 c2; do echo $c2; done | cut -d " " -f1`
+echo $address
+echo "http://$address/"
