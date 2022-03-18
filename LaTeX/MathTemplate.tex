@@ -1,0 +1,86 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{blindtext}
+\usepackage{polski}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{enumitem}
+\usepackage{gensymb}
+\usepackage{amsthm}
+
+%\textwidth=8in \textheight=9in 
+%\oddsidemargin=0.5in
+%\topmargin=-1in
+
+\author{John Doe}
+\title{Untitled}
+\date{December 4, 2017} % use \date{\today} or comment this line to have a current date
+
+%\frenchspacing
+
+\DeclareMathOperator{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\RealNumbers}{\mathbb{R}}
+\newcommand{\RationalNumbers}{\mathbb{Q}}
+\newcommand{\NaturalNumbers}{\mathbb{N}}
+\newcommand{\ComplexNumbers}{\mathbb{C}}
+\newcommand{\IntegerNumbers}{\mathbb{Z}}
+\newcommand{\PrimeNumbers}{\mathbb{P}}
+\newcommand{\ZeroFunction}{\textbf{0}}
+\newcommand{\ZeroVector}{\mathbf{0}}
+\newcommand{\OneFunction}{\textbf{1}}
+\newcommand{\Identity}{\mathrm{Id}}
+\newcommand{\GCD}[1]{NWD(#1)}
+\newcommand{\LCM}[1]{NWW(#1)}
+\newcommand{\Order}[1]{\mathrm{ord}(#1)}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\Inv}[1]{(#1)^{-1}}
+\newcommand{\Closure}[1]{\overline{#1}}
+\newcommand{\SetOf}[1]{\{#1\}}
+\newcommand{\Continuum}{\mathfrak{c}}
+%\newcommand{\Abs}[1]{\abs[\bigg]{#1}}
+%\newcommand{\Abs}[1]{\lvert#1\rvert}
+%\newcommand{\Abs}[1]{|#1|}
+\newcommand{\Abs}[1]{\left|#1\right|}
+%\newcommand{\Norm}[1]{\left|\left|#1\right|\right|}
+\newcommand{\Norm}[1]{\lVert #1 \rVert}
+\newcommand{\Diff}[1]{\operatorname{d}#1}
+\newcommand{\Derivative}[2]{\frac{\Diff{#1}}{\Diff{#2}}}
+\newcommand{\Deg}{^{\circ}}
+\newcommand{\Kelvin}{\operatorname{K}}
+\newcommand{\Celsius}{^{\circ{}}\text{C}}
+\newcommand{\Fahrenheit}{^{\circ}\text{F}}
+
+% aby twierdzenia nie miały pochyłej numeracji
+%\theoremstyle{plain}
+
+\newtheorem{tw}{Twierdzenie}
+\newtheorem{lem}{Lemat}
+\newtheorem{wn}{Wniosek}
+\newtheorem{fakt}{Fakt}
+\newtheorem{uw}{Uwaga}
+\newtheorem{defin}{Definicja}
+\newtheorem{prz}{Przykład}
+\newenvironment{dow}{\par \noindent \emph{Dowód.\ }}{\hfill $\Box$ \par}
+
+\begin{document}
+    %\maketitle       % uncomment it to include the title page
+    %\tableofcontents % uncomment it to include the table of contents
+    \blindtext        % comment it to remove Lorem Ipsum
+    % --------------------------------------------------------------
+    % write document down below
+
+
+
+    % --------------------------------------------------------------
+    % bibliography
+    %\begin{thebibliography}{99}
+    %    \bibitem{a1} Julian Trevor, „Trailer Canada boys”
+    %\end{thebibliography}
+\end{document}
