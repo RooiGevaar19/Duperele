@@ -1,0 +1,39 @@
+source data3.m
+
+function [res, err] = cramerSolve (A, b) 
+    err = "";
+    [Rows, Cols] = size(A);
+    Cols2 = size(b);
+    if (Cols != Cols2)
+        error("Wektor po prawej nie ma tego samego rozmiaru co macierz po lewej.");
+    endif
+    Det = det(A);
+    if (Det == 0)
+        #error("Układ nie jest układem Cramera");
+        err = "Układ nie jest układem Cramera";
+        res = [];
+        return;
+    endif
+    err = "";
+    res = [];
+    for i = (1:Cols)
+        pom = A;
+        pom(:,i) = b;
+        x = det(pom);
+        res = [res; x/Det];
+    endfor
+endfunction
+
+function attemptCramer(A, b)
+    [res, err] = cramerSolve(A, b);
+    if (!isempty(err))
+        printf("%s ", err);
+    else
+        printf("%8.4f  ", res);
+    endif
+endfunction
+
+printf("a) "); attemptCramer(A, a); printf("\n");
+printf("b) "); attemptCramer(B, b); printf("\n");
+printf("c) "); attemptCramer(C, c); printf("\n");
+printf("d) "); attemptCramer(D, d); printf("\n");
