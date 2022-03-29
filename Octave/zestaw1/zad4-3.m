@@ -25,7 +25,7 @@ hold on
 %subplot (2, 1, 2)
 plot(x, y2);
 hold off 
-title(sprintf("Wykres funkcji f(x), g(x)", wzor1_str));
+title("Wykres funkcji f(x), g(x)");
 line(xlim, zeros(2), "linestyle", "-", "color", "black");
 line(zeros(2), ylim, "linestyle", "-", "color", "black");
 xlabel("x");
